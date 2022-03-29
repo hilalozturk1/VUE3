@@ -22,7 +22,12 @@
         <br/><br/>
         <button v-on:click="changeTitle('Changed Title 1')">Change Title 1</button>
         <button v-on:click="changeTitle('Changed Title 2')">Change Title 2</button>
-        <div class="box" @click="changeTitle('Changed Title 3')"></div>
+        <div 
+            class="box" 
+            @click="changeTitle('Changed Title 3')" 
+            @mousemove="updateCoords('Mouse Move',$event)">
+        </div>
+        <span> {{coords.x}} {{coords.y}} </span>
     </div>
     <script src="app.js"></script>
 </body>
