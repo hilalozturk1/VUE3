@@ -9,11 +9,17 @@
 </head>
 <body>
     <div id="app" style="margin: auto; text-align: center;">
-        <h3> {{counter}} </h3>
+        <h3> {{ counter }} </h3>
         <button @click="counter++">+</button>
         <button @click="counter--">-</button>
         <br>
-        <h5> {{counter > 5 ? 'Greater' : 'Less'}} </h5>
+        <h5> {{ getCounterResult }} </h5>
+        <hr>
+        <h3> {{ counter2 }} </h3>
+        <button @click="counter2++">+</button>
+        <button @click="counter2--">-</button>
+        <br>
+        <h5> {{ getCounter2Result }} </h5>
     </div>
     <script src="app.js"></script>
 </body>
