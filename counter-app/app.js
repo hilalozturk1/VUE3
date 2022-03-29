@@ -17,5 +17,14 @@ const app = Vue.createApp({
             console.log('counter2 worked');
             return this.counter2 > 5 ? 'Greater' : 'Less';
         }
+    },
+    watch : { 
+        //observer
+        counter(newValue, oldValue){
+            console.log(oldValue + "=>" + newValue);
+        },
+        getCounterResult(newValue, oldValue){
+            console.log(oldValue + "=>" + newValue);
+        },
     }
 }).mount("#app")
