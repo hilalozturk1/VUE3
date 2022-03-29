@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
@@ -18,6 +19,10 @@
             :exampleAttribute="examp">
                 {{google.title}} 
         </a>
+        <br/><br/>
+        <button v-on:click="changeTitle('Changed Title 1')">Change Title 1</button>
+        <button v-on:click="changeTitle('Changed Title 2')">Change Title 2</button>
+        <div class="box" @click="changeTitle('Changed Title 3')"></div>
     </div>
     <script src="app.js"></script>
 </body>

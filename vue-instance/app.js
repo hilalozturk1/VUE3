@@ -12,6 +12,11 @@ const app = Vue.createApp({
             examp : "attribute"
         }
     },
+    methods: {
+        changeTitle(passTitle) {
+            this.title = passTitle;
+        }
+    },
 }).mount("#app");
 
 
