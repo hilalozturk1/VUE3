@@ -11,6 +11,13 @@
     <div id="app">
         <h1> {{title}} </h1>
         <p>  {{content}} </p>
+        <a
+            v-bind:href="google.url" 
+            :target="google.target" 
+            :alt="google.alt"
+            :exampleAttribute="examp">
+                {{google.title}} 
+        </a>
     </div>
     <script src="app.js"></script>
 </body>
