@@ -10,7 +10,8 @@
 <body>
     <div id="app" style="margin: auto;text-align: center;">
         <h3>Event</h3>
-        <input type="text" @input="updateValue" :value="fullName"><br>
+        <!-- <input type="text" @input="updateValue" :value="fullName"><br> -->
+        <input type="text" v-model="fullName"><br>
         {{fullName}}
         <br>
         <button>Add</button>
