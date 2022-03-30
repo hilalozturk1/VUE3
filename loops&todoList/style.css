@@ -1,0 +1,27 @@
+.uncompletedItem{
+    background-color: #dc354536;
+}
+.completedItem{
+    background-color: #19875440;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+#app{
+    width: 185px;
+    margin: auto;
+}
+span {
+    font-size: 12px;
+}
+li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px;
+    align-items: center;
+}
+li div {
+    display: flex;
+}

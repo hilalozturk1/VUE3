@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h3 style="text-align: center;">Todo List</h3>
+        <input type="text" name="" id="" @keydown.enter = "addTodo">
+        <div v-if="todoList.length">
+            <ul>
+                <li v-for="todo in todoList" :key="todo.id" 
+                    :class="{completedItem : todo.completed, uncompletedItem : !todo.completed}">
+                    <div>
+                        <input type="checkbox" :id="todo.id" v-model="todo.completed">
+                        <label :for="todo.id"> {{todo.text}} </label>
+                    </div>
+                    <button @click="removeItem(todo)"> delete </button>
+                </li>
+            </ul>
+            <span>Number of completed things to do {{completedItemCount}} </span> <br>
+            <span>Number of incomplete things to do {{unCompletedItemCount}} </span>
+        </div>
+        <div v-else>There is no todo added yet.</div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
