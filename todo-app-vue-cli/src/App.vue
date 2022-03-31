@@ -3,7 +3,7 @@
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
     <AddSection />
-    <TodoList />
+    <TodoList :myData="todoList"/>
     <ResultBar />
   </div>
 </template>
@@ -17,15 +17,20 @@ import ResultBar from "@/components/ResultBar"
       TodoList,
       ResultBar
     },
-    data() {
-      return {
-        todoList : [
+    created() {//db
+      setTimeout(() => {
+        this.todoList = [
           {id : 1, text : "Todo #1"},
           {id : 2, text : "Todo #2"},
           {id : 3, text : "Todo #3"},
           {id : 4, text : "Todo #4"},
           {id : 5, text : "Todo #5"},
           ]
+      },2000)
+    },
+    data() {
+      return {
+        todoList : []
       }
     },
     methods: {
