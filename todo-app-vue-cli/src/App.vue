@@ -3,10 +3,7 @@
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
     <AddSection :addNewTodo="addNewTodo" />
-    <ListSection 
-      :todoList="todoList" 
-      @delete-todo-item="deleteItem"
-    />
+    <ListSection />
     <!-- <TodoList :myData="todoList" @delete-todo-item="deleteItem"/>
     <ResultBar :itemCount="todoList.length"/> -->
   </div>
@@ -23,28 +20,42 @@ import ListSection from "@/components/ListSection"
       // ResultBar,
       ListSection
     },
-    created() {//db
-      setTimeout(() => {
-        this.todoList = [
-          {id : 1, text : "Todo #1"},
-          {id : 2, text : "Todo #2"},
-          {id : 3, text : "Todo #3"},
-          {id : 4, text : "Todo #4"},
-          {id : 5, text : "Todo #5"},
-          ]
-      },2000)
-    },
+    // created() {//db
+    //   setTimeout(() => {
+    //     this.todoList = [
+    //       {id : 1, text : "Todo #1"},
+    //       {id : 2, text : "Todo #2"},
+    //       {id : 3, text : "Todo #3"},
+    //       {id : 4, text : "Todo #4"},
+    //       {id : 5, text : "Todo #5"},
+    //       ]
+    //   },2000)
+    // },
     data() {
       return {
-        todoList : []
+        provideData: {
+          todoList : [
+            {id : 1, text : "Todo #1"},
+            {id : 2, text : "Todo #2"},
+            {id : 3, text : "Todo #3"},
+            {id : 4, text : "Todo #4"},
+            {id : 5, text : "Todo #5"},
+          ]
+        }
+      }
+    },
+    provide() { //only vue3
+      return {
+        provideData : this.provideData,
+        deleteItem : this.deleteItem
       }
     },
     methods: {
       deleteItem(todo) {
-        this.todoList = this.todoList.filter((t) => t != todo)
+        this.provideData.todoList = this.provideData.todoList.filter((t) => t != todo)
       },
       addNewTodo(todo) {
-        this.todoList.push({
+        this.provideData.todoList.push({
           id : new Date().getTime(),
           text : todo
         });

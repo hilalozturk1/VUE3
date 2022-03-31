@@ -1,6 +1,6 @@
 <template>
-    <TodoList :myData="todoList" @delete-todo-item="$emit('delete-todo-item', $event)"/>
-    <ResultBar :itemCount="todoList.length"/>
+    <TodoList/>
+    <ResultBar :itemCount="provideData.todoList.length"/>
 </template>
 <script>
 import TodoList from "@/components/TodoList" 
@@ -12,6 +12,7 @@ export default {
             required: true
         }
     },
+    inject : ["provideData"],
     components: {
       TodoList,
       ResultBar

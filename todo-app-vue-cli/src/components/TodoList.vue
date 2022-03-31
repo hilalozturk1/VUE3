@@ -1,10 +1,9 @@
 <template>
     <ul>
         <TodoListItem 
-            v-for="todoItem in myData" 
+            v-for="todoItem in provideData.todoList" 
             :key="todoItem.id" 
             :item="todoItem"
-            @delete-todo-item="$emit('delete-todo-item', $event)"
         />
     </ul>
 </template>
@@ -14,7 +13,8 @@ export default {
     components: {
         TodoListItem
     },
-    props:["myData"],
+    //props:["myData"],
+    inject : ["provideData"] //only vue3
     // props: {
     //     myData: {
     //         type : Array,
