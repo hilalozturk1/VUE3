@@ -3,8 +3,8 @@
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
     <AddSection @add-event="addNewTodo" />
-    <TodoList :myData="todoList"/>
-    <ResultBar />
+    <TodoList :myData="todoList" @delete-todo-item="deleteItem"/>
+    <ResultBar :itemCount="todoList.length"/>
   </div>
 </template>
 <script>
@@ -35,7 +35,6 @@ import ResultBar from "@/components/ResultBar"
     },
     methods: {
       deleteItem(todo) {
-        console.log('todo', todo)
         this.todoList = this.todoList.filter((t) => t != todo)
       },
       addNewTodo(todo) {

@@ -1,6 +1,11 @@
 <template>
     <ul>
-        <TodoListItem v-for="todoItem in myData" :key="todoItem.id" :item="todoItem"/>
+        <TodoListItem 
+            v-for="todoItem in myData" 
+            :key="todoItem.id" 
+            :item="todoItem"
+            @delete-todo-item="$emit('delete-todo-item', $event)"
+        />
     </ul>
 </template>
 <script>
