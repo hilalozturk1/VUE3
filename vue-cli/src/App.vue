@@ -1,4 +1,5 @@
 <template>
+  <app-header/>
   <div class="container">
     <h3>Vue CLI</h3>
     <p>Single File Component</p>
