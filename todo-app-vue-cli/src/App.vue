@@ -3,19 +3,25 @@
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
     <AddSection :addNewTodo="addNewTodo" />
-    <TodoList :myData="todoList" @delete-todo-item="deleteItem"/>
-    <ResultBar :itemCount="todoList.length"/>
+    <ListSection 
+      :todoList="todoList" 
+      @delete-todo-item="deleteItem"
+    />
+    <!-- <TodoList :myData="todoList" @delete-todo-item="deleteItem"/>
+    <ResultBar :itemCount="todoList.length"/> -->
   </div>
 </template>
 <script>
 import AddSection from "@/components/AddSection" 
-import TodoList from "@/components/TodoList" 
-import ResultBar from "@/components/ResultBar" 
+// import TodoList from "@/components/TodoList" 
+// import ResultBar from "@/components/ResultBar" 
+import ListSection from "@/components/ListSection"
   export default {
     components: {
       AddSection,
-      TodoList,
-      ResultBar
+      // TodoList,
+      // ResultBar,
+      ListSection
     },
     created() {//db
       setTimeout(() => {
