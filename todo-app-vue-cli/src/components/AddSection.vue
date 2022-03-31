@@ -7,3 +7,13 @@
         placeholder="Write down the things to be done..."
     >
 </template>
+<script>
+export default {
+    methods: {
+        addNewTodo(event) {
+            this.$emit("add-event", event.target.value);
+            event.target.value = null;
+        }
+    },
+}
+</script>

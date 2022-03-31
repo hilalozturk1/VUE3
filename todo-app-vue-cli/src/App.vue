@@ -2,7 +2,7 @@
   <div class="container">
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
-    <AddSection />
+    <AddSection @add-event="addNewTodo" />
     <TodoList :myData="todoList"/>
     <ResultBar />
   </div>
@@ -38,12 +38,16 @@ import ResultBar from "@/components/ResultBar"
         console.log('todo', todo)
         this.todoList = this.todoList.filter((t) => t != todo)
       },
-      addNewTodo(event) {
+      addNewTodo(todo) {
         this.todoList.push({
           id : new Date().getTime(),
-          text : event.target.value
+          text : todo
         });
-        event.target.value = "";
+        // this.todoList.push({
+        //   id : new Date().getTime(),
+        //   text : event.target.value
+        // });
+        // event.target.value = "";
       }
     },
   }
