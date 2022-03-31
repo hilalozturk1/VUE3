@@ -2,23 +2,21 @@
   <div class="container">
     <h3 class="text-center">ToDo App</h3>
     <hr class="my-2">
-    <label for="todoText"></label>
-    <input @keydown.enter="addNewTodo" type="text" name="" id="todoText" placeholder="Write down the things to be done...">
-    <ul>
-      <li 
-        v-for="todo in todoList"
-        :key="todo.id"
-        class="d-flex justify-content-between align-items-center"
-      >
-        <span> {{todo.text}} </span>
-        <button class="sm red" @click="deleteItem(todo)">Remove</button>
-      </li>
-    </ul>
-    <small class="mt-2 d-flex justify-content-end">There are {{todoList.length}} todo</small>
+    <AddSection />
+    <TodoList />
+    <ResultBar />
   </div>
 </template>
 <script>
+import AddSection from "@/components/AddSection" 
+import TodoList from "@/components/TodoList" 
+import ResultBar from "@/components/ResultBar" 
   export default {
+    components: {
+      AddSection,
+      TodoList,
+      ResultBar
+    },
     data() {
       return {
         todoList : [
