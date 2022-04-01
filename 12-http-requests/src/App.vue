@@ -6,20 +6,12 @@
       <input type="text" placeholder="What will you have?" @keydown.enter="onSave">
     </div>
     <ul>
-      <li class="d-flex align-items-center justify-content-between">
-        <span>Item 1</span>
-        <button class="red">Delete</button>
-      </li>
-      <li class="d-flex align-items-center justify-content-between">
-        <span>Item 1</span>
-        <button class="red">Delete</button>
-      </li>
-      <li class="d-flex align-items-center justify-content-between">
-        <span>Item 1</span>
+      <li v-for="item in itemList" :key="item.id" class="d-flex align-items-center justify-content-between">
+        <span> {{item.title}} </span>
         <button class="red">Delete</button>
       </li>
     </ul>
-    <span>There are 5 products</span>
+    <span>There are {{itemList.length}} products</span>
   </div>  
 </template>
 <script>
@@ -44,7 +36,7 @@ export default {
         created_at : new Date(),
         completed : false
       };
-      
+
       axios.post("http://localhost:3000/items", saveObject).then(save_response => {
         //saving to db.json file
         console.log('save_response', save_response);
