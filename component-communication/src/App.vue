@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <UserSection :userList="userList" @new-item="userList.push($event)"/>
+    <UserSection />
   </div>
 </template>
 <script>
@@ -16,9 +16,15 @@ export default {
       }
     }
   },
+  methods: {
+    newItem(item) {
+      this.provideData.userList.push(item)
+    }
+  },
   provide() {
     return {
-      userList : this.provideData.userList
+      userList : this.provideData.userList,
+      newItem : this.newItem
     }
   }
 }
