@@ -1,6 +1,8 @@
 <template>
   <Modal :onSave="onSave">
-    <h3>The header information that comes with the slot</h3>
+    <template #title>
+      <h3>The header information that comes with the slot</h3>
+    </template>
   </Modal>
 </template>
 <script>
