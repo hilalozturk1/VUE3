@@ -5,12 +5,10 @@
         </div>
         <hr>
         <div class="content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Quam consequatur id qui dolores quod quasi enim assumenda
-            laborum soluta doloremque molestiae rem, amet dolor natus 
-            doloribus maxime voluptates autem dolorem?
+            <slot name="content" />
         </div>
         <hr>
+        <slot />
         <div class="footer">
             <button>Close</button>
             <button class="green" @click="onSave">Submit</button>
