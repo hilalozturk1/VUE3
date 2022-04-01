@@ -11,7 +11,14 @@ export default {
   },
   data() {
     return {
-      userList : ["Name1" , "Name2" , "Name3"]
+      provideData : {
+        userList : ["Name1" , "Name2" , "Name3"]
+      }
+    }
+  },
+  provide() {
+    return {
+      userList : this.provideData.userList
     }
   }
 }
