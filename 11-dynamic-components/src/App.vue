@@ -7,9 +7,11 @@
     <Green v-if="activeComponents === 'Green'" class="mb-2"/>
     <Blue v-if="activeComponents === 'Blue'"/> -->
     {{activeComponents}}
-    <component :is="activeComponents" msg="Red Component">
+    <keep-alive>
+      <component :is="activeComponents" msg="Red Component">
           <h3 class="bg-green">Green Component</h3>
-    </component>
+      </component>
+    </keep-alive>
   </div>
 </template>
 <script>

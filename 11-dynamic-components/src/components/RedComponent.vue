@@ -3,6 +3,9 @@
 </template>
 <script>
 export default {
-    props : ["msg"]
+    props : ["msg"],
+    mounted() {
+        console.log("red mounted")
+    },
 }
 </script>
