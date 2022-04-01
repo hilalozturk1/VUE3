@@ -8,7 +8,19 @@ const store = createStore ({
             age: 24
         },
         theme : "dark",
-        permission : [1,2,3,45,6]
+        permission : [1,2,3,45,6],
+        userList : ["Name1", "Name2", "Name3", "Name4"],
+        fullName : "Hilal Öztürk",
+        itemList : [
+            {id:1, title: "table", type:"furniture"},
+            {id:2, title: "chair", type:"furniture"},
+            {id:3, title: "TV", type:"electronic"},
+            {id:4, title: "monitor", type:"electronic"},
+            {id:5, title: "carpet", type:"furniture"}
+        ]
+    },
+    getters : {
+        woodItems : state => state.itemList.filter(i => i.type == 'furniture')
     }
 })
 
