@@ -11,6 +11,10 @@ export default {
                 name: "DetailsPage",
                 params : {
                     userID: event.target.value
+                },
+                query : {
+                    type: "DetailAuth",
+                    user: "tayfunerbilen"
                 }
             })
         }
