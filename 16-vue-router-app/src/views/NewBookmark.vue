@@ -34,6 +34,7 @@ export default {
                 // getting user data information into the db
                 console.log('save_response', save_response)
                 this.resetData(this.userData);
+                this.$router.push("/");
             })
         },
         resetData(data){
