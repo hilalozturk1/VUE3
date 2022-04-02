@@ -10,10 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="i in 10" :key="i">
-                <th scope="row">1</th>
-                <td>Vue3</td>
-                <td>https://v3.vuejs.org</td>
+            <tr v-for="i in bookmarkList" :key="i.id">
+                <th scope="row"> {{i.id}} </th>
+                <td> {{i.title}} </td>
+                <td> 
+                    <a :href="i.url" target="_blank"> {{i.url}} </a>
+                </td>
                 <td>
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
@@ -21,3 +23,18 @@
         </tbody>
     </table>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            bookmarkList: []
+        }
+    },
+    created() {
+        this.$appAxios.get("/bookmarks").then(bookmarks_list_response => {
+            this.bookmarkList = bookmarks_list_response.data || []
+            //console.log('bookmarks_list_response', bookmarks_list_response)
+        })
+    },
+}
+</script>
