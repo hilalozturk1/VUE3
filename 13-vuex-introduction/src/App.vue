@@ -9,7 +9,7 @@
     </ul>
     {{ $store.state.fullName }}
     <ul>
-      <li v-for="item in $store.getters.woodItems" :key="item">
+      <li v-for="item in woodItems" :key="item">
         {{ item.title }}
       </li>
     </ul>
@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   created() {
     console.log(this.$store.state.person)
@@ -24,6 +25,12 @@ export default {
     //console.log(this.$store.state.itemList.filter(i => i.type == 'furniture'))
     console.log(this.$store.getters.woodItems) 
     console.log(this.$store.getters.activeUser) 
+  },
+  computed : {
+    ...mapGetters(["woodItems", "activeUser"]),
+    // customComputed(){
+
+    // }
   }
 }
 </script>
