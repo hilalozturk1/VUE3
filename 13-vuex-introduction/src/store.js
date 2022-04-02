@@ -22,6 +22,11 @@ const store = createStore ({
             {id:5, title: "carpet", type:"furniture"}
         ]
     },
+    mutations : {//the state updates instantly - works synchronously
+        newItem(state, item) {
+            state.itemList.push(item);
+        }
+    },
     getters : {
         _woodItems : state => state.itemList.filter(i => i.type == 'furniture'),
         _activeUser(state) {
