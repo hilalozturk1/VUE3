@@ -33,7 +33,11 @@ export default {
             this.$axios.post("http://localhost:3000/bookmarks",this.userData).then(save_response => {
                 // getting user data information into the db
                 console.log('save_response', save_response)
+                this.resetData(this.userData);
             })
+        },
+        resetData(data){
+            Object.keys(data).forEach(key => (data[key] =null));
         }
     },
 }
