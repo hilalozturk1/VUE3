@@ -1,11 +1,14 @@
 import { createStore } from "vuex";
 
 const store = createStore ({
-    state : {//the app is accessible throughout
+    state : {//these states are accessible throughout the app
         person : {
             name : "Hilal",
             lname : "Öztürk",
-            age: 24
+            age: 24,
+            address : {},
+            password : 123123123,
+            id : 11111
         },
         theme : "dark",
         permission : [1,2,3,45,6],
@@ -20,7 +23,14 @@ const store = createStore ({
         ]
     },
     getters : {
-        woodItems : state => state.itemList.filter(i => i.type == 'furniture')
+        woodItems : state => state.itemList.filter(i => i.type == 'furniture'),
+        activeUser(state) {
+            const user = {
+                ...state.person
+            };
+            delete user.password; //deleting the password without deleting the person's state
+            return user;
+        }
     }
 })
 
