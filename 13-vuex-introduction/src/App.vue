@@ -8,7 +8,12 @@
       </li>
     </ul>
     {{ $store.state.fullName }}
-    <button @click="this.$store.state.fullName = new Date().getTime()"> Changed State info </button>
+    <ul>
+      <li v-for="item in $store.getters.woodItems" :key="item">
+        {{ item.title }}
+      </li>
+    </ul>
+    <button @click="this.$store.state.fullName = new Date().getTime(); this.$store.state.itemList.push({ id:6, title: 'shelf', type: 'furniture'})"> Changed State info </button>
   </div>
 </template>
 <script>
@@ -18,6 +23,7 @@ export default {
     console.log(this.$store.state.theme)
     //console.log(this.$store.state.itemList.filter(i => i.type == 'furniture'))
     console.log(this.$store.getters.woodItems) 
+    console.log(this.$store.getters.activeUser) 
   }
 }
 </script>
