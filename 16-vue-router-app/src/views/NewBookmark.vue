@@ -29,7 +29,11 @@ export default {
     },
     methods: {
         onSave(){
-            console.log('this.userData', this.userData)
+            console.log('this.userData', this.userData);
+            this.$axios.post("http://localhost:3000/bookmarks",this.userData).then(save_response => {
+                // getting user data information into the db
+                console.log('save_response', save_response)
+            })
         }
     },
 }
