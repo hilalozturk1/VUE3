@@ -23,8 +23,8 @@ const store = createStore ({
         ]
     },
     getters : {
-        woodItems : state => state.itemList.filter(i => i.type == 'furniture'),
-        activeUser(state) {
+        _woodItems : state => state.itemList.filter(i => i.type == 'furniture'),
+        _activeUser(state) {
             const user = {
                 ...state.person
             };

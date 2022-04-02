@@ -23,11 +23,15 @@ export default {
     console.log(this.$store.state.person)
     console.log(this.$store.state.theme)
     //console.log(this.$store.state.itemList.filter(i => i.type == 'furniture'))
-    console.log(this.$store.getters.woodItems) 
-    console.log(this.$store.getters.activeUser) 
+    console.log(this.$store.getters._woodItems) 
+    console.log(this.$store.getters._activeUser) 
   },
   computed : {
-    ...mapGetters(["woodItems", "activeUser"]),
+    // ...mapGetters(["woodItems", "activeUser"]),
+    ...mapGetters({
+      woodItems : "_woodItems",
+      activeUser : "_activeUser"
+    })
     // customComputed(){
 
     // }
