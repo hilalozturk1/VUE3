@@ -6,7 +6,13 @@
 export default {
     methods: {
         goToDetails(event){
-            this.$router.push("/details/"+event.target.value);
+            //this.$router.push("/details/"+event.target.value);
+            this.$router.push({
+                name: "DetailsPage",
+                params : {
+                    userID: event.target.value
+                }
+            })
         }
     },
 }
