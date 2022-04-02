@@ -27,6 +27,15 @@ const store = createStore ({
             state.itemList.push(item);
         }
     },
+    actions : {//works asynchronously & like vuex instance
+        newItem({commit}, item){
+            console.log('item', item);
+            setTimeout(() => {
+                //context.commit("newItem",item)
+                commit("newItem",item);
+            }, 2000);
+        }
+    },
     getters : {
         _woodItems : state => state.itemList.filter(i => i.type == 'furniture'),
         _activeUser(state) {

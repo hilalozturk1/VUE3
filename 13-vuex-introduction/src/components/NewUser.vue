@@ -10,7 +10,8 @@ export default {
                 title: 'shelf'+ new Date().getTime(), 
                 type: 'furniture'
             };
-            this.$store.commit("newItem", userData); // trigger mutations
+            this.$store.dispatch("newItem", userData)//trigger action
+            //this.$store.commit("newItem", userData); // trigger mutations
             //this.$store.state.itemList.push(userData);
             //this.$store.state.fullName = new Date().getTime(); 
         }
