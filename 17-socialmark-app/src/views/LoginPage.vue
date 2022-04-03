@@ -6,7 +6,7 @@
     <button class="default-button">Login</button>
     <span class="text-center mt-3 text-sm">
       I am not member,
-      <a href="#" class="text-red-900 hover:text-black"
+      <a @click="$router.push({name : 'RegisterPage'})" class="text-red-900 hover:text-black"
         >I want to be a member!</a
       >
     </span>
