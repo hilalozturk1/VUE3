@@ -8,14 +8,9 @@
           </svg>
           SocialMark
         </div>
-        <div class="hidden">
-          <a class="mr-3 navbar-item" href="#">Home</a>
-          <a class="mr-3 navbar-item" href="#">My Posts</a>
-          <a class="navbar-item" href="#">Favorites</a>
-        </div>
 
         <div class="ml-auto flex items-center">
-          <button class="flex bg-gray-700 hover:bg-black text-white px-3 py-1 rounded-sm text-sm items-center mr-2">
+          <button @click="$router.push({name: 'NewBookmarkPage'})" class="flex bg-gray-700 hover:bg-black text-white px-3 py-1 rounded-sm text-sm items-center mr-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" height="16" viewBox="0 0 24 24" width="16">
               <path d="M0 0h24v24H0V0z" fill="none" />
               <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />

@@ -16,6 +16,11 @@ const routes = [
         name : "RegisterPage",
         path : "/register",
         component : () => import("@/views/RegisterPage")
+    },
+    {
+        name : "NewBookmarkPage",
+        path : "/new",
+        component : () => import("@/views/NewBookmark")
     }
 ]
 
