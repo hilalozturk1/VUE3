@@ -12,6 +12,9 @@ const store = createStore({
     mutations:{//for user setting
         setUser(state, user){
            state.user = user; 
+        },
+        logoutUser(state){
+            state.user = null;
         }
     },
     getters : {
