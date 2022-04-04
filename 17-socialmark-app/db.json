@@ -1,5 +1,25 @@
 {
-    "users": [],
-    "bookmarks": [],
-    "categories": []
+  "users": [
+    {
+      "username": "hilal",
+      "fullname": "Hilal",
+      "password": "6458cdc13c70b2c6d67f4dd3c0ea0a770406f13b",
+      "id": 1
+    }
+  ],
+  "bookmarks": [],
+  "categories": [
+    {
+      "name": "Vue.js",
+      "id": 1
+    },
+    {
+      "name": "React.js",
+      "id": 2
+    },
+    {
+      "name": "Angular.js",
+      "id": 3
+    }
+  ]
 }
