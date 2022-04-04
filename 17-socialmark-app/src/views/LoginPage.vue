@@ -29,6 +29,12 @@ export default {
       const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
       this.$appAxios.get("/users?username="+this.userData.username+"&password="+password)
         .then(login_response => {
+          if(login_response?.data?.length > 0){
+            this.$store.commit("setUser", login_response?.data[0])//update user the app level
+          }
+          else{
+            alert("The user was not found..")
+          }
           console.log('login_response', login_response)
         })
         .catch(e => console.log('e', e));

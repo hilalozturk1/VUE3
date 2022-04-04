@@ -5,6 +5,11 @@ const store = createStore({
         user: null,
         saltKey : "booklikle123?"
     },
+    mutations:{//for user setting
+        setUser(state, user){
+           state.user = user; 
+        }
+    },
     getters : {
         _isAuthenticated: state => state.user != null,//true-false
         _getCurrentUser(state){
