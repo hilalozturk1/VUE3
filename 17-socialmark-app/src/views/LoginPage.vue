@@ -26,8 +26,12 @@ export default {
   methods: {
     onSubmit(){
       // GET /post?title=json-server&author=typicode
-      const cryptedPassword = CryptoJS.AES.encrypt(this.userData.password, this.$store.getters._saltKey).toString();
-      this.$appAxios.get("/user?username="+this.userData.username+"&password="+cryptedPassword);
+      const cryptedPassword = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
+      this.$appAxios.get("/users?username="+this.userData.username+"&password="+cryptedPassword)
+      .then(login_response => {
+        console.log('login_response', login_response)
+      })
+      .catch(e => console.log('e', e));
     }
   },
 }
