@@ -31,6 +31,7 @@ export default {
         .then(login_response => {
           if(login_response?.data?.length > 0){
             this.$store.commit("setUser", login_response?.data[0])//update user the app level
+            this.$router.push({name: "HomePage"})
           }
           else{
             alert("The user was not found..")
