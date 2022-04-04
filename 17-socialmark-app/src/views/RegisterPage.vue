@@ -25,13 +25,12 @@ export default {
   },
   methods: {
     onSave(){
-      const password = this.userData.password;
       //const key =  "booklikle123?"
-      const cryptedPassword = CryptoJS.HmacSHA1(password, this.$store.getters._saltKey).toString();
+      const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
       //console.log(cryptedPassword);
       //const decryptedPassword = CryptoJS.AES.decrypt(cryptedPassword , key).toString(CryptoJS.enc.Utf8);
       //console.log('decryptedPassword', decryptedPassword)
-      this.$appAxios.post("/users",{...this.userData, cryptedPassword}).then(save_response => {
+      this.$appAxios.post("/users",{...this.userData, password}).then(save_response => {
         console.log('save_response', save_response)
         this.$router.push({name: "HomePage"})
       })
