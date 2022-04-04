@@ -5,9 +5,7 @@
     <input type="text" placeholder="URL" class="input mb-3" />
     <select class="input mb-3">
       <option disabled value="" selected>Categori</option>
-      <option value="">Vue</option>
-      <option value="">React</option>
-      <option value="">Social</option>
+      <option v-for="category in categoryList" :value="category.name" :key="category.id"> {{category.name}} </option>
     </select>
     <textarea
       placeholder="Description"
@@ -21,3 +19,17 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      categoryList: []
+    }
+  },
+  mounted() {
+    this.$appAxios.get('/categories').then(category_response => {
+      this.categoryList = category_response?.data || [];
+    });
+  },
+}
+</script>
