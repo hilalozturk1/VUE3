@@ -38,7 +38,7 @@ export default {
     this.$appAxios.get('/categories').then(category_response => {
       this.categoryList = category_response?.data || [];
     });
-   // console.log(this.$refs.title);
+   this.$refs.title.focus();
   },
   methods: {
     onSave(){
