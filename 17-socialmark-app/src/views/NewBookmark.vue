@@ -1,7 +1,7 @@
 <template>
   <div class="login_register_container">
     <h3 class="text-2xl text-center mb-3">Add New</h3>
-    <input v-model="userData.title" type="text" placeholder="Title" class="input mb-3" />
+    <input ref="title" v-model="userData.title" type="text" placeholder="Title" class="input mb-3" />
     <input v-model="userData.url" type="text" placeholder="URL" class="input mb-3" />
     <select class="input mb-3" v-model="userData.category_id">
       <option disabled value="" selected>Categori</option>
@@ -38,6 +38,7 @@ export default {
     this.$appAxios.get('/categories').then(category_response => {
       this.categoryList = category_response?.data || [];
     });
+   // console.log(this.$refs.title);
   },
   methods: {
     onSave(){
@@ -51,6 +52,7 @@ export default {
       this.$appAxios.post("/bookmarks", saveData).then(save_bookmark_response => {
         console.log('save_bookmark_response', save_bookmark_response)
         Object.keys(this.userData)?.forEach(field => this.userData[field] = null)
+        this.$router.push({name:"HomePage"})
       })
     }
   },
