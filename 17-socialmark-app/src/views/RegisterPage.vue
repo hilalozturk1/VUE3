@@ -26,8 +26,8 @@ export default {
   methods: {
     onSave(){
       const password = this.userData.password;
-      const key =  "booklikle123?"
-      const cryptedPassword = CryptoJS.AES.encrypt(password, key).toString();
+      //const key =  "booklikle123?"
+      const cryptedPassword = CryptoJS.AES.encrypt(password, this.$store.getters._saltKey).toString();
       //console.log(cryptedPassword);
       //const decryptedPassword = CryptoJS.AES.decrypt(cryptedPassword , key).toString(CryptoJS.enc.Utf8);
       //console.log('decryptedPassword', decryptedPassword)
