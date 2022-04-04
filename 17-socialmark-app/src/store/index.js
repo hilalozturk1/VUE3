@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import createPersistadState from "vuex-persistedstate"
 
 const store = createStore({
     state: {
@@ -18,7 +19,8 @@ const store = createStore({
             return user;
         },
         _saltKey: state => state.saltKey
-    }
+    },
+    plugins: [createPersistadState()]
 });
 
 export default store;
