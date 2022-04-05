@@ -8,7 +8,7 @@
         >{{item.title || "-"}}</a
       >
       <div class="flex items-center justify-center mt-2 gap-x-1">
-        <button class="like-btn group" @click="likeItem">
+        <button class="like-btn group" @click="likeItem" :class="alreadyLiked">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current group-hover:text-white"
@@ -81,6 +81,9 @@ export default {
     },
     userName(){
       return this.item?.user?.fullname || "-"
+    },
+    alreadyLiked(){
+      return { "bookmark-item-active" : this._userLikes?.indexOf(this.item.id) > -1 }
     },
     ...mapGetters(["_getCurrentUser", "_userLikes"])//fetch userlikes&current user from store
   },
