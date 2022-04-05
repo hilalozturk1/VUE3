@@ -22,7 +22,7 @@
             />
           </svg>
         </button>
-        <button class="bookmark-btn group bookmark-item-active">
+        <button class="bookmark-btn group" @click="bookmarkItem" :class="{'like-item-active' : alreadyBookmarked}">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current group-hover:text-white"
@@ -85,7 +85,10 @@ export default {
     alreadyLiked(){
       return  this._userLikes?.indexOf(this.item.id) > -1;
     },
-    ...mapGetters(["_getCurrentUser", "_userLikes"])//fetch userlikes&current user from store
+    alreadyBookmarked(){
+      return  this._userBookmarks?.indexOf(this.item.id) > -1;
+    },
+    ...mapGetters(["_getCurrentUser", "_userLikes", "_userBookmarks"])//fetch userlikes&current user from store
   },
   methods: {
     likeItem(){
@@ -102,6 +105,18 @@ export default {
         console.log('like_response', like_response)
         this.$store.commit("addToLikes", likes);
       })//update user likes
+    },
+    bookmarkItem(){
+      let bookmarks = [ ...this._userBookmarks];
+      if(!this.alreadyBookmarked){//false
+        bookmarks = [...bookmarks,this.item.id]
+      }
+      else{
+        bookmarks = bookmarks.filter(b => b != this.item.id)
+      }
+      this.$appAxios.patch("/users/"+this._getCurrentUser.id, {bookmarks} ).then(() => {//
+        this.$store.commit("setBookmarks", bookmarks);
+      })
     }
   }
 }
