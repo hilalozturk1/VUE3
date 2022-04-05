@@ -25,7 +25,8 @@ export default {
   },
   methods: {
     updateBookmarkList(categoryId){
-      this.$appAxios.get("/bookmarks?_expand=category&_expand=user&categoryId="+categoryId).then(bookmark_list_response => {
+      const url = categoryId ? "/bookmarks?_expand=category&_expand=user&categoryId="+categoryId : "/bookmarks?_expand=category&_expand=user"
+      this.$appAxios.get(url).then(bookmark_list_response => {
       this.bookmarkList = bookmark_list_response?.data || []
     })
     }
