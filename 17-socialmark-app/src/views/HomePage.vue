@@ -2,7 +2,8 @@
   <AppHeader />
   <div class="flex flex-row">
     <SideBar @category-changed="updateBookmarkList"/>
-    <appBookmarkList :items="bookmarkList" />
+    <appBookmarkList v-if="bookmarkList.length > 0" :items="bookmarkList" />
+    <div v-else>There is no bookmark</div>
   </div>
 </template>
 <script>
