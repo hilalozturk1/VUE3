@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
   <div class="flex flex-row">
-    <SideBar />
+    <SideBar @category-changed="updateBookmarkList"/>
     <appBookmarkList :items="bookmarkList" />
   </div>
 </template>
@@ -22,6 +22,13 @@ export default {
       console.log('bookmark_list_response', bookmark_list_response)
       this.bookmarkList = bookmark_list_response?.data || []
     })
+  },
+  methods: {
+    updateBookmarkList(categoryId){
+      this.$appAxios.get("/bookmarks?_expand=category&_expand=user&categoryId="+categoryId).then(bookmark_list_response => {
+      this.bookmarkList = bookmark_list_response?.data || []
+    })
+    }
   },
 };
 </script>
