@@ -8,7 +8,7 @@
         >{{item.title || "-"}}</a
       >
       <div class="flex items-center justify-center mt-2 gap-x-1">
-        <button class="like-btn group" @click="likeItem" :class="alreadyLiked">
+        <button class="like-btn group" @click="likeItem" :class="{'bookmark-item-active' : alreadyLiked}">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current group-hover:text-white"
@@ -83,18 +83,24 @@ export default {
       return this.item?.user?.fullname || "-"
     },
     alreadyLiked(){
-      return { "bookmark-item-active" : this._userLikes?.indexOf(this.item.id) > -1 }
+      return  this._userLikes?.indexOf(this.item.id) > -1;
     },
     ...mapGetters(["_getCurrentUser", "_userLikes"])//fetch userlikes&current user from store
   },
   methods: {
     likeItem(){
       console.log('_userLikes', this._userLikes);
-      const likes = [ ...this._userLikes, this.item.id];//create an array and use fetched userLikes with bookmarkID
-      console.log('likes', likes)
+      let likes = [ ...this._userLikes];//create an array and use fetched userLikes with bookmarkID
+      //console.log('likes', likes)
+      if(!this.alreadyLiked){//false
+        likes = [...likes,this.item.id]
+      }
+      else{
+        likes = likes.filter(l => l != this.item.id)
+      }
       this.$appAxios.patch("/users/"+this._getCurrentUser.id, {likes} ).then(like_response =>{//
         console.log('like_response', like_response)
-        this.$store.commit("addToLikes", this.item.id);
+        this.$store.commit("addToLikes", likes);
       })//update user likes
     }
   }

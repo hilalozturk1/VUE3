@@ -17,7 +17,7 @@ const store = createStore({
             state.user = null;
         },
         addToLikes(state,bookmarkId){
-            state.user.likes.push(bookmarkId);
+            state.user.likes = bookmarkId;
         }
     },
     getters : {
