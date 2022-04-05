@@ -91,6 +91,7 @@ export default {
       console.log('likes', likes)
       this.$appAxios.patch("/users/"+this._getCurrentUser.id, {likes} ).then(like_response =>{//
         console.log('like_response', like_response)
+        this.$store.commit("addToLikes", this.item.id);
       })//update user likes
     }
   }

@@ -15,6 +15,9 @@ const store = createStore({
         },
         logoutUser(state){
             state.user = null;
+        },
+        addToLikes(state,bookmarkId){
+            state.user.likes.push(bookmarkId);
         }
     },
     getters : {
