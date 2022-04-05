@@ -58,11 +58,11 @@
         </div>
       </div>
       <div class="text-xs text-gray-400 mt-2 flex justify-between">
-        <a href="#" class="hover:text-black"> Countly </a>
+        <a href="#" class="hover:text-black"> {{userName}} </a>
         <span>14 March</span>
       </div>
     </div>
-    <div class="bg-red-200 p-1 text-red-900 text-center text-sm"> {{item.category_id}} </div>
+    <div class="bg-red-200 p-1 text-red-900 text-center text-sm"> {{ categoryName }} </div>
   </div>
 </template>
 <script>
@@ -72,6 +72,14 @@ export default {
       type:Object,
       required:true,
       default: () => {}
+    }
+  },
+  computed:{
+    categoryName(){
+      return this.item?.category?.name || "-"//
+    },
+    userName(){
+      return this.item?.user?.fullname || "-"
     }
   }
 }
