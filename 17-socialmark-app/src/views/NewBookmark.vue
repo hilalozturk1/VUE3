@@ -3,7 +3,7 @@
     <h3 class="text-2xl text-center mb-3">Add New</h3>
     <input ref="title" v-model="userData.title" type="text" placeholder="Title" class="input mb-3" />
     <input v-model="userData.url" type="text" placeholder="URL" class="input mb-3" />
-    <select class="input mb-3" v-model="userData.category_id">
+    <select class="input mb-3" v-model="userData.categoryId">
       <option disabled value="" selected>Categori</option>
       <option v-for="category in categoryList" :value="category.id" :key="category.id"> {{category.name}} </option>
     </select>
@@ -29,7 +29,7 @@ export default {
       userData: {
         title: null,
         url: null,
-        category_id: null,
+        categoryId: null,
         description: null
       }
     }
@@ -46,7 +46,7 @@ export default {
       console.log(this._getCurrentUser)
       const saveData = {
         ...this.userData,
-        user_id : this._getCurrentUser?.id,
+        userId : this._getCurrentUser?.id,
         created_at : new Date()
       }
       this.$appAxios.post("/bookmarks", saveData).then(save_bookmark_response => {

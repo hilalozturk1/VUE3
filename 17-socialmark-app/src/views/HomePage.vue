@@ -17,7 +17,8 @@ export default {
     }
   },
   created() {
-    this.$appAxios.get("/bookmarks").then(bookmark_list_response => {
+    this.$appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
+      //get categoryId matched id below categories  & get user matched id below users
       console.log('bookmark_list_response', bookmark_list_response)
       this.bookmarkList = bookmark_list_response?.data || []
     })
