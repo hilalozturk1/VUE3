@@ -8,7 +8,7 @@
         >{{item.title || "-"}}</a
       >
       <div class="flex items-center justify-center mt-2 gap-x-1">
-        <button class="like-btn group">
+        <button class="like-btn group" @click="likeItem">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current group-hover:text-white"
@@ -66,6 +66,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   props:{
     item:{
@@ -80,6 +81,17 @@ export default {
     },
     userName(){
       return this.item?.user?.fullname || "-"
+    },
+    ...mapGetters(["_getCurrentUser", "_userLikes"])//fetch userlikes&current user from store
+  },
+  methods: {
+    likeItem(){
+      console.log('_userLikes', this._userLikes);
+      const likes = [ ...this._userLikes, this.item.id];//create an array and use fetched userLikes with bookmarkID
+      console.log('likes', likes)
+      this.$appAxios.patch("/users/"+this._getCurrentUser.id, {likes} ).then(like_response =>{//
+        console.log('like_response', like_response)
+      })//update user likes
     }
   }
 }

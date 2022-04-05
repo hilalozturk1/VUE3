@@ -24,6 +24,8 @@ const store = createStore({
             delete user?.password;//optional chaining
             return user;
         },
+        _userLikes: state => state?.user?.likes || [],
+        _userBookmarks: state => state?.user?.bookmarks || [],
         _saltKey: state => state.saltKey
     },
     plugins: [createPersistadState({
