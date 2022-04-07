@@ -9,6 +9,7 @@
 </template>
 <script>
 import sideBar from "@/components/Account/sideBar";
+import io from "socket.io-client";
 export default {
   components: {
     sideBar,
@@ -16,6 +17,7 @@ export default {
   data() {
     return {
       bookmarkList: [],
+      socket : {}//keeps clint side of the socket
     };
   },
   created() {
@@ -24,6 +26,9 @@ export default {
       .then((bookmark_list_response) => {
         this.bookmarkList = bookmark_list_response?.data || []; 
       });
+  },
+  mounted() {
+    this.socket = io("http://localhost:2022")
   },
 };
 </script>
