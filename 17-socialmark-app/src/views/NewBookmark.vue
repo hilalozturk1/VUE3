@@ -52,6 +52,7 @@ export default {
       this.$appAxios.post("/bookmarks", saveData).then(save_bookmark_response => {
         console.log('save_bookmark_response', save_bookmark_response)
         Object.keys(this.userData)?.forEach(field => this.userData[field] = null)
+        this.$socket.emit("NEW_BOOKMARK_EVENT", save_bookmark_response.data);
         this.$router.push({name:"HomePage"})
       })
     }
