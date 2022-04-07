@@ -13,7 +13,6 @@
 </template>
 <script>
 import sideBar from "@/components/Account/sideBar";
-import io from "socket.io-client";
 export default {
   components: {
     sideBar,
@@ -21,7 +20,7 @@ export default {
   data() {
     return {
       bookmarkList: [],
-      socket : {}//keeps clint side of the socket
+      /*socket : {}//keeps clint side of the socket*/
     };
   },
   created() {
@@ -32,8 +31,7 @@ export default {
       });
   },
   mounted() {
-    this.socket = io("http://localhost:2022");
-    this.socket.on("WELCOME_MESSAGE", this.WELCOME_MESSAGE);
+    this.$socket.on("WELCOME_MESSAGE", this.WELCOME_MESSAGE);
   },
   methods: {
     WELCOME_MESSAGE(data){
@@ -41,7 +39,7 @@ export default {
     },
     SEND_MESSAGE(e){
       console.log('e', e.target.value)
-      this.socket.emit("SEND_MESSAGE",  e.target.value)
+      this.$socket.emit("SEND_MESSAGE",  e.target.value)
     }
   },
 };
