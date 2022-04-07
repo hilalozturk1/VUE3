@@ -28,7 +28,13 @@ export default {
       });
   },
   mounted() {
-    this.socket = io("http://localhost:2022")
+    this.socket = io("http://localhost:2022");
+    this.socket.on("WELCOME_MESSAGE", this.WELCOME_MESSAGE);
+  },
+  methods: {
+    WELCOME_MESSAGE(data){
+      console.log('data', data)
+    }
   },
 };
 </script>

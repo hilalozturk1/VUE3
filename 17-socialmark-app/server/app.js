@@ -14,6 +14,7 @@ const io = socketio(server, {
 });
  server.listen(PORT, () => {
     io.on("connection", (socket) => {
-        console.log('socket', socket.id)
+        console.log('socket', socket.id);
+        socket.emit("WELCOME_MESSAGE", "Welcome "+ socket.id)
     })
  })
