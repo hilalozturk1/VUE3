@@ -18,6 +18,7 @@ const io = socketio(server, {
         socket.emit("WELCOME_MESSAGE", "Welcome "+ socket.id);
         socket.on("NEW_BOOKMARK_EVENT", (bookmark) =>  {
             console.log('added new bookmark', bookmark)
+            io.emit("NEW_BOOKMARK_ADDED")//send all users
         })
     })
  })

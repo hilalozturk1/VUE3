@@ -17,14 +17,22 @@ export default {
       bookmarkList: []
     }
   },
-  created() {
-    this.$appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
-      //get categoryId matched id below categories  & get user matched id below users
-      console.log('bookmark_list_response', bookmark_list_response)
-      this.bookmarkList = bookmark_list_response?.data || []
+  mounted() {
+    this.$socket.on("NEW_BOOKMARK_ADDED", () =>  {
+     this.fetchData();
     })
   },
+  created() {
+    this.fetchData();
+  },
   methods: {
+    fetchData(){
+      this.$appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
+        //get categoryId matched id below categories  & get user matched id below users
+        console.log('bookmark_list_response', bookmark_list_response)
+        this.bookmarkList = bookmark_list_response?.data || []
+      })
+    },
     updateBookmarkList(categoryId){
       const url = categoryId ? "/bookmarks?_expand=category&_expand=user&categoryId="+categoryId : "/bookmarks?_expand=category&_expand=user"
       this.$appAxios.get(url).then(bookmark_list_response => {
