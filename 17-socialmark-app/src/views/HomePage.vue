@@ -18,8 +18,8 @@ export default {
     }
   },
   mounted() {
-    this.$socket.on("NEW_BOOKMARK_ADDED", () =>  {
-     this.fetchData();
+    this.$socket.on("NEW_BOOKMARK_ADDED", bookmark =>  {
+     this.bookmarkList.push(bookmark);
     })
   },
   created() {
