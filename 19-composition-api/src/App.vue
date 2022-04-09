@@ -9,9 +9,11 @@
     voluptates laborum labore accusantium vitae dolor?
   </p>
   <button @click="toggleIt">Toggle</button>
+  <hr>
+  <button @click="counter++">{{ counter }} {{ oddOrEven }}</button>
 </template>
 <script>
-import { ref,computed } from "vue";
+import { ref,computed,watch } from "vue";
 export default {
   // data() {
   //   return {
@@ -26,12 +28,17 @@ export default {
     const toggleIt = () => {show.value = !show.value}
     const titleLengthMessage = computed(() => {
       return title.value.length + "character"
-    })
+    });
+    const counter = ref (0);
+    const oddOrEven = computed(() => ( counter.value % 2 == 0 ? "even" : "odd" ));
+    watch([counter, oddOrEven], ([newC,new0], [oldC, old0]) => { console.log(new0,old0 )})
     return {
       title,
       show,
       toggleIt,
-      titleLengthMessage
+      titleLengthMessage,
+      counter,
+      oddOrEven 
     }
   }
 }
