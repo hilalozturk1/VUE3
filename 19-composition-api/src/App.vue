@@ -51,12 +51,13 @@ export default {
     //   }
     // })
 
-    watchEffect((onInvalidate) => {//triggered according to value
+    const stop = watchEffect((onInvalidate) => {//triggered according to value
         if(searchText.value.length > 0 ) {
         isTyping.value = true;
 
         const typing = setTimeout(() => {
           isTyping.value = false;
+          stop();
         },1500)
 
         onInvalidate(() => clearTimeout(typing))//async req
