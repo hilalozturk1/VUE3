@@ -1,6 +1,7 @@
 <template>
   <h3> {{title}} </h3>
   <input type="text" name="" id="" v-model="title">
+  {{ titleLengthMessage }}
   <p v-if="show">
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Excepturi aliquam nesciunt vero facilis deserunt odit debitis magni animi, 
@@ -10,7 +11,7 @@
   <button @click="toggleIt">Toggle</button>
 </template>
 <script>
-import { ref } from "vue";
+import { ref,computed } from "vue";
 export default {
   // data() {
   //   return {
@@ -23,10 +24,14 @@ export default {
     const title = ref("Setup Title") // needs to return an object
     const show = ref(false);
     const toggleIt = () => {show.value = !show.value}
+    const titleLengthMessage = computed(() => {
+      return title.value.length + "character"
+    })
     return {
       title,
       show,
-      toggleIt
+      toggleIt,
+      titleLengthMessage
     }
   }
 }
