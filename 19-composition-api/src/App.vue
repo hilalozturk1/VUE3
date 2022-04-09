@@ -7,7 +7,7 @@
     architecto provident quisquam doloremque, aspernatur explicabo, 
     voluptates laborum labore accusantium vitae dolor?
   </p>
-  <button @click="show = !show">Toggle</button>
+  <button @click="toggleIt">Toggle</button>
 </template>
 <script>
 import { ref } from "vue";
@@ -22,9 +22,11 @@ export default {
     //purpose of setup is to work before without creation data reactivity and to create data
     const title = ref("Setup Title") // needs to return an object
     const show = ref(false);
+    const toggleIt = () => {show.value = !show.value}
     return {
       title,
-      show
+      show,
+      toggleIt
     }
   }
 }
