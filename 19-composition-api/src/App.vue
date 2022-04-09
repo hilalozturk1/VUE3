@@ -16,54 +16,16 @@
   <p v-if="isTyping">Typing right now..</p>
 </template>
 <script>
-import { ref,computed,watch,watchEffect } from "vue";
+import Counter from "./composables/Counter.js";
+import Header from "./composables/Header.js";
+import Serach from "./composables/Search.js";
+import Toggle from "./composables/Toggle.js";
 export default {
-  // data() {
-  //   return {
-  //     title : "Title"
-  //   }
-  // },
-  setup() {//to use composition api together with option api 
-    //setup funk. being used instead of data-beforeCreate-created
-    //purpose of setup is to work before without creation data reactivity and to create data
-    const title = ref("Setup Title") // needs to return an object
-    const show = ref(false);
-    const toggleIt = () => {show.value = !show.value}
-    const titleLengthMessage = computed(() => {
-      return title.value.length + "character"
-    });
-    const counter = ref (0);
-    const oddOrEven = computed(() => ( counter.value % 2 == 0 ? "even" : "odd" ));
-    watch([counter, oddOrEven], ([newC,new0], [oldC, old0]) => { console.log(new0,old0 )})
-
-    /******************************** */
-
-    const searchText = ref("");
-    const isTyping =  ref(false);
-
-    // watch(searchText, () => {
-    //   if(searchText.value.length > 0 ) {
-    //     isTyping.value = true;
-
-    //     setTimeout(() => {
-    //       isTyping.value = false;
-    //     },1500)
-    //   }
-    // })
-
-    const stop = watchEffect((onInvalidate) => {//triggered according to value
-        if(searchText.value.length > 0 ) {
-        isTyping.value = true;
-
-        const typing = setTimeout(() => {
-          isTyping.value = false;
-          stop();
-        },1500)
-
-        onInvalidate(() => clearTimeout(typing))//async req
-      }
-    })
-
+  setup() {
+    const { counter, oddOrEven } = Counter();//destructive
+    const { searchText, isTyping } = Serach();
+    const { title, titleLengthMessage } = Header();
+    const { show, toggleIt } =  Toggle();
     return {
       title,
       show,
