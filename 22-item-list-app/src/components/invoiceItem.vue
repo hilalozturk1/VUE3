@@ -5,7 +5,7 @@
     <input v-model="item.unit_price" autocomplete="off" type="text" class="input w-[100px] mr-2" />
     <span class="p-1 text-center text-gray-400">${{item.qty*item.unit_price}} </span>
     <div class="text-right flex-grow">
-      <button class="delete-button">
+      <button class="delete-button" @click="DeleteInvoiceItem(item)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="fill-current"
@@ -23,5 +23,7 @@
   </div>
 </template>
 <script setup>
-defineProps({ item: Object})
+import {inject} from "vue";
+defineProps({ item: Object});
+const DeleteInvoiceItem = inject("DeleteInvoiceItem");
 </script>

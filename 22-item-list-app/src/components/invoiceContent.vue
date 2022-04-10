@@ -21,7 +21,7 @@
 import invoiceItems from "./invoiceItems.vue"
 import invoiceSummary from "./invoiceSummary.vue"
 import contactSection from "./contactSection.vue"
-import {reactive} from "vue";
+import {reactive,provide} from "vue";
 const state = reactive({
   contact : {
     contactName : null,
@@ -34,10 +34,17 @@ const state = reactive({
 });
 const AddInvoiceItem = () => {
   state.items.push({
+    id : new Date().getTime(),
     name : null,
     qty : null,
     unit_price : 0.0,
     total_price : 0.0 
   })
-}
+};
+const DeleteInvoiceItem = (invoiceItem) => {
+  console.log('invoiceItem', invoiceItem)
+  state.items = state.items.filter((i) => i.id != invoiceItem.id);
+};
+
+provide("DeleteInvoiceItem", DeleteInvoiceItem);
 </script>
