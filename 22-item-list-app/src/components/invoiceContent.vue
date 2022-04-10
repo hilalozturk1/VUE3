@@ -56,5 +56,13 @@ const onSubmit = () => {
     created_at: new Date(), 
     id : new Date().getTime()
   })
+    state.contact = {
+    contactName : null,
+    email : null,
+    city : null,
+    country : null,
+    zipcode : null
+  };
+  state.items = [];
 }
 </script>
