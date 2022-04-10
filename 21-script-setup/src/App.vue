@@ -12,7 +12,7 @@
 </template>
 <script setup>
 // beforeCreate() created() and data()
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 import oddOrEven from "./components/oddOrEven.vue";
 import Utils from "./composables/Utils.js";
 const { title, counter, inc, alertMe } = Utils();
@@ -25,4 +25,11 @@ const state = reactive({
     lname: null,
   },
 });
+watch(//watch reactive value
+  () => JSON.parse(JSON.stringify(state.personal)),
+  (newPersonal, oldPersonal) => {
+    console.log('newPersonal', newPersonal);
+    console.log('oldPersonal', oldPersonal);
+  }
+);
 </script>
