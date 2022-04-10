@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 export default function () {
     const title = ref("TITLE");
     const counter = ref(0);
@@ -7,5 +7,8 @@ export default function () {
     }
     const alertMe = (info) => { console.log('info', info) }
 
+    onMounted(() => {
+        console.log("onMounted func.")
+    })
     return {title, counter, inc, alertMe}
 }
