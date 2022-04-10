@@ -3,7 +3,7 @@
   <input type="text" v-model="title">
   <button @click="inc"> {{counter}} </button>
   <hr>
-  <oddOrEven :counter="counter"/>
+  <oddOrEven :counter="counter" @odd-event="alertMe"/>
 </template>
 <script setup>
 import oddOrEven from "./components/oddOrEven.vue"
@@ -13,4 +13,5 @@ const counter = ref(0);
 const inc = () => {
   counter.value++; 
 }
+const alertMe = (info) => { console.log('info', info)}
 </script>
