@@ -6,7 +6,7 @@
     <span class="p-1 w-[100px]">Total</span>
   </div>
   <div class="table-body">
-    <invoice-item />
+    <invoice-item v-for="i in 5" :key="i"/>
     <button class="mt-4 add-item-button">
       <svg
         class="fill-current"
