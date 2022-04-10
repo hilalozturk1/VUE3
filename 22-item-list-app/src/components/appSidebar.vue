@@ -9,7 +9,7 @@
       <span>{{i.id}}</span>
       <span>{{i.contact.contactName}}</span> 
       <span>
-        <button class="danger-button mr-1">
+        <button class="danger-button mr-1" @click="deleteInvoice(i)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current"
@@ -42,5 +42,5 @@
   </aside>
 </template>
 <script setup>
-defineProps({ invoiceList : Array, editInvoice : Function})
+defineProps({ invoiceList : Array, editInvoice : Function, deleteInvoice : Function})
 </script>

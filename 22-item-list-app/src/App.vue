@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen h-screen bg-gray-800 flex flex-row text-white items-start justify-center">
-    <app-sidebar :invoiceList="invoiceList" :editInvoice="editInvoice"/>
+    <app-sidebar :invoiceList="invoiceList" :editInvoice="editInvoice" :deleteInvoice="deleteInvoice"/>
     <invoice-content :saveInvoice="saveInvoice" :activeInvoice="state.activeInvoice"/>
   </div>
 </template>
@@ -16,5 +16,8 @@ const saveInvoice = (invoice) => {
 }
 const editInvoice = (invoice) => {
    state.activeInvoice = invoice
+}
+const deleteInvoice = (invoice) => {
+  invoiceList.value = invoiceList.value.filter ((i) => i.id != invoice.id)
 }
 </script>
