@@ -21,8 +21,8 @@
 import invoiceItems from "./invoiceItems.vue"
 import invoiceSummary from "./invoiceSummary.vue"
 import contactSection from "./contactSection.vue"
-import {reactive,provide} from "vue";
-const props = defineProps({ saveInvoice : Function})
+import {reactive,provide,watch} from "vue";
+const props = defineProps({ saveInvoice : Function, activeInvoice : [Object, null]})
 const state = reactive({
   contact : {
     contactName : null,
@@ -65,4 +65,17 @@ const onSubmit = () => {
   };
   state.items = [];
 }
+
+watch(
+  () => props.activeInvoice, 
+  (activeInvoice) => {
+    if(activeInvoice){
+      state.contact = {
+        ...activeInvoice.contact
+      };
+      state.items = [...activeInvoice.items];
+
+    }
+  console.log('activeInvoice', activeInvoice)
+})
 </script>

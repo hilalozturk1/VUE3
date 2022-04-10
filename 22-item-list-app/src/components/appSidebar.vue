@@ -6,7 +6,7 @@
       :key="i.id"
       class="odd:bg-gray-600 flex justify-between items-center p-2"
     >
-      <span>{{idx}}</span>
+      <span>{{i.id}}</span>
       <span>{{i.contact.contactName}}</span> 
       <span>
         <button class="danger-button mr-1">
@@ -23,7 +23,7 @@
             />
           </svg>
         </button>
-        <button class="purple-button">
+        <button class="purple-button" @click="editInvoice(i)">
           <svg
             class="fill-current"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,5 +42,5 @@
   </aside>
 </template>
 <script setup>
-defineProps({ invoiceList : Array})
+defineProps({ invoiceList : Array, editInvoice : Function})
 </script>
