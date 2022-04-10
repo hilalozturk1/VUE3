@@ -10,7 +10,7 @@
       <invoice-items :items="state.items" :AddInvoiceItem="AddInvoiceItem"/>
     </div>
     <!-- Summary -->
-    <invoice-summary/>
+    <invoice-summary :items="state.items"/>
     <hr class="bg-gradient-to-r h-[1px] border-none from-gray-700 mt-5" />
     <div class="actionbar text-right my-5">
       <button class="purple-button">Save</button>

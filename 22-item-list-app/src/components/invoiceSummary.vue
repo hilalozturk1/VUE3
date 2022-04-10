@@ -11,4 +11,10 @@
       <div class="text-gray-300">118,00</div>
     </div>
   </div>
+  {{items}}
 </template>
+<script setup>
+import {computed} from "vue";
+const props = defineProps({ items : Array});
+console.log('props.items', props.items)
+</script>
