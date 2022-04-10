@@ -6,15 +6,20 @@
       <div class="text-gray-300">Grand Total :</div>
     </div>
     <div class="text-right">
-      <div class="text-gray-500">100,00</div>
-      <div class="text-gray-400">18,00</div>
-      <div class="text-gray-300">118,00</div>
+      <div class="text-gray-500">{{ subTotal }}</div>
+      <div class="text-gray-400">{{ taxTotal }}</div>
+      <div class="text-gray-300">{{ total }}</div>
     </div>
   </div>
-  {{items}}
+  {{ items }}
 </template>
 <script setup>
-import {computed} from "vue";
-const props = defineProps({ items : Array});
-console.log('props.items', props.items)
+import { computed } from "vue";
+const props = defineProps({ items: Array });
+const subTotal = computed(() =>
+  props.items.reduce((t, i) => t + i.total_price, 0)
+);
+const taxTotal = computed(() => subTotal.value * 0.18);
+const total = computed(() => subTotal.value + taxTotal.value);
+console.log("props.items", props.items);
 </script>
