@@ -13,7 +13,7 @@
     <invoice-summary :items="state.items"/>
     <hr class="bg-gradient-to-r h-[1px] border-none from-gray-700 mt-5" />
     <div class="actionbar text-right my-5">
-      <button class="purple-button">Save</button>
+      <button @click="onSubmit" class="purple-button">Save</button>
     </div>
   </section>
 </template>
@@ -22,6 +22,7 @@ import invoiceItems from "./invoiceItems.vue"
 import invoiceSummary from "./invoiceSummary.vue"
 import contactSection from "./contactSection.vue"
 import {reactive,provide} from "vue";
+const props = defineProps({ saveInvoice : Function})
 const state = reactive({
   contact : {
     contactName : null,
@@ -47,4 +48,13 @@ const DeleteInvoiceItem = (invoiceItem) => {
 };
 
 provide("DeleteInvoiceItem", DeleteInvoiceItem);
+
+const onSubmit = () => {
+  console.log('state', state)
+  props.saveInvoice({
+    ...state, 
+    created_at: new Date(), 
+    id : new Date().getTime()
+  })
+}
 </script>

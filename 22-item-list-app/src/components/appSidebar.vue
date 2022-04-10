@@ -2,12 +2,12 @@
   <aside class="bg-gray-700 w-[300px] h-screen">
     <h3 class="text-2xl font-bold mt-2 p-2">Invoice List</h3>
     <div
-      v-for="i in 5"
-      :key="i"
+      v-for="(i,idx) in invoiceList"
+      :key="i.id"
       class="odd:bg-gray-600 flex justify-between items-center p-2"
     >
-      <span>#45fg4</span>
-      <span>Kablosuzkedi</span>
+      <span>{{idx}}</span>
+      <span>{{i.contact.contactName}}</span> 
       <span>
         <button class="danger-button mr-1">
           <svg
@@ -41,3 +41,6 @@
     </div>
   </aside>
 </template>
+<script setup>
+defineProps({ invoiceList : Array})
+</script>
