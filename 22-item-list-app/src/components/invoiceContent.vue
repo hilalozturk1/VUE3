@@ -35,8 +35,7 @@
     </div>
 
     <div class="mt-5">
-      <h3 class="text-gray-400 text-xl">Invoice Items</h3>
-      <hr class="bg-gradient-to-r h-[1px] border-none from-gray-700 mb-2" />
+      <heading title="Invoice Items"/>
       <div class="table-header flex">
         <span class="text-left p-1 w-[200px] mr-2">Product Name</span>
         <span class="text-left p-1 w-[50px] mr-2">Item</span>
