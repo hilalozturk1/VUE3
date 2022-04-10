@@ -4,13 +4,13 @@
   >
     <heading title="Invoice Info"/>
     <contact-section :contact="state.contact"/>
-
+    {{state.contact}}
     <div class="mt-5">
       <heading title="Invoice Items"/>
-      <invoice-items :items="state.items"/>
+      <invoice-items :items="state.items" :AddInvoiceItem="AddInvoiceItem"/>
     </div>
     <!-- Summary -->
-    <invoice-summary />
+    <invoice-summary/>
     <hr class="bg-gradient-to-r h-[1px] border-none from-gray-700 mt-5" />
     <div class="actionbar text-right my-5">
       <button class="purple-button">Save</button>
@@ -31,5 +31,13 @@ const state = reactive({
     zipcode : null
   },
   items : []
-})
+});
+const AddInvoiceItem = () => {
+  state.items.push({
+    name : null,
+    qty : null,
+    unit_price : 0.0,
+    total_price : 0.0 
+  })
+}
 </script>

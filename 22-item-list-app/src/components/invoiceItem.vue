@@ -1,9 +1,9 @@
 <template>
   <div class="table-body-item group">
-    <input autocomplete="off" type="text" class="input w-[200px] mr-2" />
-    <input autocomplete="off" type="text" class="input w-[50px] mr-2" />
-    <input autocomplete="off" type="text" class="input w-[100px] mr-2" />
-    <span class="p-1 text-center text-gray-400">$1500</span>
+    <input v-model="item.name" autocomplete="off" type="text" class="input w-[200px] mr-2" />
+    <input v-model="item.qty" autocomplete="off" type="text" class="input w-[50px] mr-2" />
+    <input v-model="item.unit_price" autocomplete="off" type="text" class="input w-[100px] mr-2" />
+    <span class="p-1 text-center text-gray-400">${{item.qty*item.unit_price}} </span>
     <div class="text-right flex-grow">
       <button class="delete-button">
         <svg
@@ -22,3 +22,6 @@
     </div>
   </div>
 </template>
+<script setup>
+defineProps({ item: Object})
+</script>
