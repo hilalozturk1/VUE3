@@ -6,39 +6,29 @@
     <div v-else>There is no bookmark</div>
   </div>
 </template>
-<script>
+<script setup>
 import SideBar from "@/components/Home/SideBar";
-export default {
-  components: {
-    SideBar,
-  },
-  data() {
-    return {
-      bookmarkList: []
-    }
-  },
-  mounted() {
-    this.$socket.on("NEW_BOOKMARK_ADDED", bookmark =>  {
-     this.bookmarkList.push(bookmark);
-    })
-  },
-  created() {
-    this.fetchData();
-  },
-  methods: {
-    fetchData(){
-      this.$appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
-        //get categoryId matched id below categories  & get user matched id below users
-        console.log('bookmark_list_response', bookmark_list_response)
-        this.bookmarkList = bookmark_list_response?.data || []
-      })
-    },
-    updateBookmarkList(categoryId){
-      const url = categoryId ? "/bookmarks?_expand=category&_expand=user&categoryId="+categoryId : "/bookmarks?_expand=category&_expand=user"
-      this.$appAxios.get(url).then(bookmark_list_response => {
-      this.bookmarkList = bookmark_list_response?.data || []
-    })
-    }
-  },
+import {ref,onMounted,inject} from "vue";
+const appAxios = inject("appAxios");
+const socket = inject("socket");
+const bookmarkList = ref([]);
+
+onMounted(() => {
+  socket.on("NEW_BOOKMARK_ADDED", bookmark =>  {
+   bookmarkList.value.push(bookmark);
+  })
+});
+
+const fetchData = () => {
+  appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
+    bookmarkList.value = bookmark_list_response?.data || []
+  })
 };
+const updateBookmarkList = (categoryId) => {
+  const url = categoryId ? "/bookmarks?_expand=category&_expand=user&categoryId="+categoryId : "/bookmarks?_expand=category&_expand=user"
+  appAxios.get(url).then(bookmark_list_response => {
+  bookmarkList.value = bookmark_list_response?.data || []
+  })
+};
+fetchData();
 </script>
