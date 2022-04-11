@@ -11,30 +11,25 @@
       </span>
     </div>
 </template>
-<script>
+<script setup>
+import { reactive, inject } from "vue";
+import { useStore} from "vuex";
+import { useRouter } from "vue-router";
 import CryptoJS from "crypto-js" 
-export default {
-  data() {
-    return {
-      userData : {
-        username : null,
-        fullname : null,
-        password : null
-      }
-    }
-  },
-  methods: {
-    onSave(){
-      //const key =  "booklikle123?"
-      const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
-      //console.log(cryptedPassword);
-      //const decryptedPassword = CryptoJS.AES.decrypt(cryptedPassword , key).toString(CryptoJS.enc.Utf8);
-      //console.log('decryptedPassword', decryptedPassword)
-      this.$appAxios.post("/users",{...this.userData, password}).then(save_response => {
-        console.log('save_response', save_response)
-        this.$router.push({name: "HomePage"})
-      })
-    }
-  },
+const appAxios = inject("appAxios");
+const store = useStore();
+const router = useRouter();
+const userData = reactive({
+  username : null,
+  fullname : null,
+  password : null
+});
+
+const onSave = () => {
+  const password = CryptoJS.HmacSHA1(userData.password, store.getters._saltKey).toString();
+  appAxios.post("/users",{...userData, password}).then(save_response => {
+    console.log('save_response', save_response)
+    router.push({name: "HomePage"})
+  })
 }
 </script>
