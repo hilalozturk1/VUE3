@@ -2,17 +2,22 @@
 import { ref } from "vue";
 
 const todoList = ref([]);
+const isLoad = ref(true);
 
 fetch("https://jsonplaceholder.typicode.com/todos")
   .then((response) => response.json())
-  .then((json) => (todoList.value = json));
+  .then((json) => {
+      todoList.value = json;
+      isLoad.value = false
+  });
 </script>
 
 <template>
   <div>
     <h3>Todos</h3>
-    <ul>
+    <ul v-if="!isLoad">
       <li v-for="todo in todoList" :key="todo.id">{{ todo.title }}</li>
     </ul>
+    <span v-else>Loading..</span>
   </div>
 </template>
