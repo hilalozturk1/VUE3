@@ -2,10 +2,10 @@
   <div class="bg-white flex flex-col gap-x-3 rounded-md shadow-sm">
     <div class="p-3">
       <a
-        :href="item.url"
+        :href="props.item.url"
         target="_blank"
         class="hover:text-black font-bold text-l mb-1 text-gray-600 text-center"
-        >{{item.title || "-"}}</a
+        >{{props.item.title || "-"}}</a
       >
       <div class="flex items-center justify-center mt-2 gap-x-1">
         <button class="like-btn group" @click="likeItem" :class="{'bookmark-item-active' : alreadyLiked}">
@@ -52,7 +52,7 @@
               />
             </svg>
             <p class="details-container">
-              {{item.description}}
+              {{props.item.description}}
             </p>
           </button>
         </div>
@@ -65,59 +65,52 @@
     <div class="bg-red-200 p-1 text-red-900 text-center text-sm"> {{ categoryName }} </div>
   </div>
 </template>
-<script>
-import { mapGetters } from "vuex";
-export default {
-  props:{
-    item:{
-      type:Object,
-      required:true,
-      default: () => {}
-    }
-  },
-  computed:{
-    categoryName(){
-      return this.item?.category?.name || "-"//
-    },
-    userName(){
-      return this.item?.user?.fullname || "-"
-    },
-    alreadyLiked(){
-      return  this._userLikes?.indexOf(this.item.id) > -1;
-    },
-    alreadyBookmarked(){
-      return  this._userBookmarks?.indexOf(this.item.id) > -1;
-    },
-    ...mapGetters(["_getCurrentUser", "_userLikes", "_userBookmarks"])//fetch userlikes&current user from store
-  },
-  methods: {
-    likeItem(){
-      console.log('_userLikes', this._userLikes);
-      let likes = [ ...this._userLikes];//create an array and use fetched userLikes with bookmarkID
-      //console.log('likes', likes)
-      if(!this.alreadyLiked){//false
-        likes = [...likes,this.item.id]
-      }
-      else{
-        likes = likes.filter(l => l != this.item.id)
-      }
-      this.$appAxios.patch("/users/"+this._getCurrentUser.id, {likes} ).then(like_response =>{//
-        console.log('like_response', like_response)
-        this.$store.commit("addToLikes", likes);
-      })//update user likes
-    },
-    bookmarkItem(){
-      let bookmarks = [ ...this._userBookmarks];
-      if(!this.alreadyBookmarked){//false
-        bookmarks = [...bookmarks,this.item.id]
-      }
-      else{
-        bookmarks = bookmarks.filter(b => b != this.item.id)
-      }
-      this.$appAxios.patch("/users/"+this._getCurrentUser.id, {bookmarks} ).then(() => {//
-        this.$store.commit("setBookmarks", bookmarks);
-      })
-    }
+<script setup>
+import {computed,defineProps,inject} from "vue";
+import { useStore } from "vuex";
+const appAxios = inject("appAxios");
+const store = useStore();
+const props = defineProps({
+  item:{
+    type:Object,
+    required:true,
+    default: () => {}
   }
+});
+//methods
+const likeItem = () => {
+  console.log('_userLikes', _userLikes);
+  let likes = [..._userLikes];
+  if(!alreadyLiked.value){
+    likes = [...likes,props.item.id]
+  }
+  else{
+    likes = likes.filter(l => l != props.item.id)
+  }
+  appAxios.patch("/users/"+_getCurrentUser.value.id, {likes} ).then(like_response =>{//
+    console.log('like_response', like_response)
+    store.commit("addToLikes", likes);
+  })
+};
+const bookmarkItem = () => {
+  let bookmarks = [..._userBookmarks];
+  if(!alreadyBookmarked.value){
+    bookmarks = [...bookmarks,props.item.id]
+  }
+  else{
+    bookmarks = bookmarks.filter(b => b != props.item.id)
+  }
+  appAxios.patch("/users/"+_getCurrentUser.value.id, {bookmarks} ).then(() => {//
+    store.commit("setBookmarks", bookmarks);
+  })
 }
+//computed
+const _getCurrentUser = computed(() => store.getters._getCurrentUser);
+const _userLikes = computed(() => store.getters._userLikes);
+const _userBookmarks = computed(() => store.getters._userBookmarks);
+
+const categoryName = computed(() => props.item?.category?.name || "-")
+const userName = computed(() => props.item?.user?.fullname || "-")
+const alreadyLiked = computed(() => _userLikes?.value.indexOf(props.item.id))
+const alreadyBookmarked = computed(() => _userBookmarks?.value.indexOf(props.item.id) > -1)
 </script>
