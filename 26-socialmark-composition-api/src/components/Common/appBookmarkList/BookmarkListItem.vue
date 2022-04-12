@@ -66,10 +66,9 @@
   </div>
 </template>
 <script setup>
-import {computed,defineProps,inject} from "vue";
-import { useStore } from "vuex";
-const appAxios = inject("appAxios");
-const store = useStore();
+/* eslint-disable no-unused-vars  */
+import {defineProps} from "vue";
+import BookmarkListItem from "@/composables/BookmarkListItem.js"
 const props = defineProps({
   item:{
     type:Object,
@@ -77,40 +76,5 @@ const props = defineProps({
     default: () => {}
   }
 });
-//methods
-const likeItem = () => {
-  console.log('_userLikes', _userLikes);
-  let likes = [..._userLikes.value];
-  if(!alreadyLiked.value){
-    likes = [...likes,props.item.id]
-  }
-  else{
-    likes = likes.filter(l => l != props.item.id)
-  }
-  appAxios.patch("/users/"+_getCurrentUser.value.id, {likes} ).then(like_response =>{//
-    console.log('like_response', like_response)
-    store.commit("addToLikes", likes);
-  })
-};
-const bookmarkItem = () => {
-  let bookmarks = [..._userBookmarks.value];
-  if(!alreadyBookmarked.value){
-    bookmarks = [...bookmarks,props.item.id]
-  }
-  else{
-    bookmarks = bookmarks.filter(b => b != props.item.id)
-  }
-  appAxios.patch("/users/"+_getCurrentUser.value.id, {bookmarks} ).then(() => {//
-    store.commit("setBookmarks", bookmarks);
-  })
-}
-//computed
-const _getCurrentUser = computed(() => store.getters._getCurrentUser);
-const _userLikes = computed(() => store.getters._userLikes);
-const _userBookmarks = computed(() => store.getters._userBookmarks);
-
-const categoryName = computed(() => props.item?.category?.name || "-")
-const userName = computed(() => props.item?.user?.fullname || "-")
-const alreadyLiked = computed(() => _userLikes?.value.indexOf(props.item.id) > -1)
-const alreadyBookmarked = computed(() => _userBookmarks?.value.indexOf(props.item.id) > -1)
+const { likeItem, bookmarkItem, _getCurrentUser, _userLikes, _userBookmarks, categoryName, userName, alreadyLiked, alreadyBookmarked } = BookmarkListItem(props.item)
 </script>
