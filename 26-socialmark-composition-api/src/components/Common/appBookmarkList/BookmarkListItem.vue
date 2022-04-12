@@ -80,7 +80,7 @@ const props = defineProps({
 //methods
 const likeItem = () => {
   console.log('_userLikes', _userLikes);
-  let likes = [..._userLikes];
+  let likes = [..._userLikes.value];
   if(!alreadyLiked.value){
     likes = [...likes,props.item.id]
   }
@@ -93,7 +93,7 @@ const likeItem = () => {
   })
 };
 const bookmarkItem = () => {
-  let bookmarks = [..._userBookmarks];
+  let bookmarks = [..._userBookmarks.value];
   if(!alreadyBookmarked.value){
     bookmarks = [...bookmarks,props.item.id]
   }
