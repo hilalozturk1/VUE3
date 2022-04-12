@@ -11,36 +11,14 @@
     <div v-else>There is no bookmark</div> -->
   </div>
 </template>
-<script>
+<script setup>
 import sideBar from "@/components/Account/sideBar";
-export default {
-  components: {
-    sideBar,
-  },
-  data() {
-    return {
-      bookmarkList: [],
-      /*socket : {}//keeps clint side of the socket*/
-    };
-  },
-  created() {
-    this.$appAxios
-      .get("/bookmarks?_expand=category&_expand=user")
-      .then((bookmark_list_response) => {
-        this.bookmarkList = bookmark_list_response?.data || []; 
-      });
-  },
-  mounted() {
-    //this.$socket.on("WELCOME_MESSAGE", this.WELCOME_MESSAGE);
-  },
-  methods: {
-    // WELCOME_MESSAGE(data){
-    //   console.log('data', data)
-    // },
-    // SEND_MESSAGE(e){
-    //   console.log('e', e.target.value)
-    //   this.$socket.emit("SEND_MESSAGE",  e.target.value)
-    // }
-  },
-};
+import {ref,inject} from "vue";
+const appAxios = inject("appAxios");
+const bookmarkList = ref([]);
+appAxios
+  .get("/bookmarks?_expand=category&_expand=user")
+  .then((bookmark_list_response) => {
+    bookmarkList.value = bookmark_list_response?.data || []; 
+  });
 </script>
