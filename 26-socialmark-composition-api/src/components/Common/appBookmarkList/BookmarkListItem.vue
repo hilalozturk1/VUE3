@@ -111,6 +111,6 @@ const _userBookmarks = computed(() => store.getters._userBookmarks);
 
 const categoryName = computed(() => props.item?.category?.name || "-")
 const userName = computed(() => props.item?.user?.fullname || "-")
-const alreadyLiked = computed(() => _userLikes?.value.indexOf(props.item.id))
+const alreadyLiked = computed(() => _userLikes?.value.indexOf(props.item.id) > -1)
 const alreadyBookmarked = computed(() => _userBookmarks?.value.indexOf(props.item.id) > -1)
 </script>
